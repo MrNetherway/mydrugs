@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Atualizar senha</title>
+</head>
+<body>
+
+    <form action="/redefinirSenha/mudar_senha" method="POST">
+
+       <br> <label >Insira abaixo sua nova senha</label><br>
+        <input type="text" name="nova_senha" placeholder="Senha"><br>
+        <div>
+            <p>{{aviso4}}</p>
+        </div>
+        <button type="submit">Enviar</button>
+       
+
+    </form>
+    
+</body>
+</html>

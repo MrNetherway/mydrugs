@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>CapacitaJá!</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <span>CAPACITAJÁ</span>
+            </div>
+        </nav>
+    </header>
+
+    <script src="arquivo.js"></script>
+
+
+    <form action="/cursos/post" method="post" enctype="multipart/form-data">
+        <div>
+            <textarea name="posting" rows="4" cols="30" placeholder="No que você está pensando?" required></textarea>
+        </div>
+        <div class="upload-arquivo">
+            <label for="arquivo">Anexar arquivo:</label>
+            <input type="file" name="arquivo">
+            <button type="submit">Postar</button>
+        </div>
+    </form>
+
+    <div class="posts-container">
+        {%if posts%}
+            {%for p in posts%}
+                <div class="post-box">
+                    <strong>{{p.usuario}}</strong> - <small>{{p.data_hora}}</small>
+                    <p>{{p.mensagem | linkify}}</p>
+                    {%if p.arquivo%}
+                        <p><a href="{{url_for('uploaded_file', filename=p.arquivo+p.extension_arquivo)}}" target="_blank">Ver Arquivo</a></p>
+                    {%endif%}
+                    <h4>Curtidas: {{p.likes}}</h4>
+                    <form action="/cursos/post/like/{{p.id}}" method="POST">
+                        <button type="submit" name="like" value="like" >Like</button>
+                        <button type="submit" name="like" value="unlike">Unlike</button>
+                    </form>
+                </div>
+            {%endfor%}
+        {%else%}
+            <p class="sem-posts">Sem posts no momento.</p>
+        {%endif%}
+    </div>
+
+    <a href="/home" class="botao">Voltar</a>
+</body>
+</html>
